@@ -1,0 +1,9 @@
+img = double(img)./255;
+dark = get_dark_channel(img);
+A = get_atm_light(dark, img);
+t_origin = estimate_trans(img,A);
+J_bad = recover_scene_radiance(img,A,t_origin, 1);
+t = soft_matting(t_origin,img);
+% I = rgb2gray(img);
+% t = guidedfilter(I,t_origin,100,0.001);
+J = recover_scene_radiance(img, A, t, 1);
